@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
 
+// 实验一：基于大模型的图结构分析系统
+
 public class Main {
     private static Map<String, Node> graph;  // 图：单词 -> 节点对象
     private static List<String> allWords;     // 所有单词列表
