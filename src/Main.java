@@ -3,6 +3,7 @@ import java.util.*;
 
 // 实验一：基于大模型的图结构分析系统
 // 第二次修改
+// C4分支修改内容
 
 public class Main {
     private static Map<String, Node> graph;  // 图：单词 -> 节点对象
