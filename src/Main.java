@@ -3,6 +3,13 @@ import java.util.*;
 
 // 实验一：基于大模型的图结构分析系统
 
+
+
+
+
+
+// R2分支修改：可添加错误处理功能
+
 public class Main {
     private static Map<String, Node> graph;  // 图：单词 -> 节点对象
     private static List<String> allWords;     // 所有单词列表
