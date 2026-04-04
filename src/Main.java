@@ -82,6 +82,7 @@ public class Main {
             System.out.println("5. 计算PageRank值");
             System.out.println("6. 随机游走");
             System.out.println("7. 保存图为Mermaid格式");  // 新增
+            System.out.println("8. 保存图为DOT格式");  // 新增
             System.out.println("0. 退出");
             System.out.print("请输入选择: ");
 
@@ -152,6 +153,9 @@ public class Main {
                     break;
                 case 7:
                     saveGraphAsMermaid();
+                    break;
+                case 8:
+                    saveGraphAsDOT();
                     break;
                 case 0:
                     System.out.println("感谢使用，再见！");
@@ -733,6 +737,72 @@ public class Main {
         }
     }
 
+    
+    /**
+     * 生成DOT格式文件（可在VS Code中用Graphviz Preview插件预览）
+     */
+    public static void saveGraphAsDOT() {
+        try {
+            // 确保output目录存在
+            File outputDir = new File("output");
+            if (!outputDir.exists()) {
+                outputDir.mkdirs();
+            }
+            
+            // 生成DOT格式的图描述文件
+            StringBuilder dot = new StringBuilder();
+            dot.append("// Directed Graph Structure\n");
+            dot.append("// Open in VS Code with Graphviz Preview plugin\n\n");
+            dot.append("digraph G {\n");
+            dot.append("  // Graph settings\n");
+            dot.append("  rankdir=LR;\n");
+            dot.append("  node [shape=box, style=filled, fillcolor=lightblue, fontname=\"SimHei\"];\n");
+            dot.append("  edge [color=gray, fontsize=10];\n");
+            dot.append("\n");
+            
+            // 添加所有节点
+            dot.append("  // Nodes\n");
+            for (Map.Entry<String, Node> entry : graph.entrySet()) {
+                String node = entry.getKey();
+                Node n = entry.getValue();
+                String safeNode = node.replace("\"", "\\\"");
+                dot.append(String.format("  \"%s\" [label=\"%s\\n(freq:%d)\"];\n", 
+                    safeNode, safeNode, n.frequency));
+            }
+            dot.append("\n");
+            
+            // 添加所有边
+            dot.append("  // Edges (with weights)\n");
+            for (Map.Entry<String, Node> entry : graph.entrySet()) {
+                String from = entry.getKey();
+                Node node = entry.getValue();
+                String safeFrom = from.replace("\"", "\\\"");
+                
+                for (Map.Entry<String, Integer> edge : node.outEdges.entrySet()) {
+                    String to = edge.getKey();
+                    int weight = edge.getValue();
+                    String safeTo = to.replace("\"", "\\\"");
+                    dot.append(String.format("  \"%s\" -> \"%s\" [label=\"%d\"];\n", 
+                        safeFrom, safeTo, weight));
+                }
+            }
+            dot.append("}\n");
+            
+            // 写入DOT文件（指定UTF-8编码）
+            String dotFile = "output/graph.dot";
+            try (OutputStreamWriter osw = new OutputStreamWriter(
+                    new FileOutputStream(dotFile), "UTF-8");
+                 PrintWriter writer = new PrintWriter(osw)) {
+                writer.print(dot.toString());
+            }
+            
+            System.out.println("✅ DOT file saved: " + dotFile);
+            System.out.println("📖 Open in VS Code, right-click and select \"Preview Dot\" to view the graph!");
+            
+        } catch (IOException e) {
+            System.out.println("❌ Save failed: " + e.getMessage());
+        }
+    }
 
 
 }

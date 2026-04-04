@@ -1,0 +1,58 @@
+// Directed Graph Structure
+// Open in VS Code with Graphviz Preview plugin
+
+digraph G {
+  // Graph settings
+  rankdir=LR;
+  node [shape=box, style=filled, fillcolor=lightblue, fontname="SimHei"];
+  edge [color=gray, fontsize=10];
+
+  // Nodes
+  "the" [label="the\n(freq:6)"];
+  "scientist" [label="scientist\n(freq:2)"];
+  "carefully" [label="carefully\n(freq:1)"];
+  "analyzed" [label="analyzed\n(freq:2)"];
+  "data" [label="data\n(freq:2)"];
+  "wrote" [label="wrote\n(freq:1)"];
+  "a" [label="a\n(freq:1)"];
+  "detailed" [label="detailed\n(freq:1)"];
+  "report" [label="report\n(freq:2)"];
+  "and" [label="and\n(freq:1)"];
+  "shared" [label="shared\n(freq:1)"];
+  "with" [label="with\n(freq:1)"];
+  "team" [label="team\n(freq:2)"];
+  "but" [label="but\n(freq:1)"];
+  "requested" [label="requested\n(freq:1)"];
+  "more" [label="more\n(freq:1)"];
+  "so" [label="so\n(freq:1)"];
+  "it" [label="it\n(freq:1)"];
+  "again" [label="again\n(freq:1)"];
+
+  // Edges (with weights)
+  "the" -> "data" [label="1"];
+  "the" -> "scientist" [label="2"];
+  "the" -> "report" [label="1"];
+  "the" -> "team" [label="2"];
+  "scientist" -> "carefully" [label="1"];
+  "scientist" -> "analyzed" [label="1"];
+  "carefully" -> "analyzed" [label="1"];
+  "analyzed" -> "the" [label="1"];
+  "analyzed" -> "it" [label="1"];
+  "data" -> "wrote" [label="1"];
+  "data" -> "so" [label="1"];
+  "wrote" -> "a" [label="1"];
+  "a" -> "detailed" [label="1"];
+  "detailed" -> "report" [label="1"];
+  "report" -> "with" [label="1"];
+  "report" -> "and" [label="1"];
+  "and" -> "shared" [label="1"];
+  "shared" -> "the" [label="1"];
+  "with" -> "the" [label="1"];
+  "team" -> "but" [label="1"];
+  "team" -> "requested" [label="1"];
+  "but" -> "the" [label="1"];
+  "requested" -> "more" [label="1"];
+  "more" -> "data" [label="1"];
+  "so" -> "the" [label="1"];
+  "it" -> "again" [label="1"];
+}
