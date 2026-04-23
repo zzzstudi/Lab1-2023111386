@@ -59,6 +59,22 @@ public class Main {
     }
   }
 
+  // ==================== 测试用方法 ====================
+
+  public static void initForTest(Map<String, Node> testGraph, List<String> wordList) {
+    graph = testGraph;
+    allWords = wordList;
+  }
+
+  public static Map<String, Node> getGraph() {
+    return graph;
+  }
+
+  public static void resetGraph() {
+    graph = new LinkedHashMap<>();
+    allWords = new ArrayList<>();
+  }
+
   /**
    * 程序入口.
    *
@@ -288,6 +304,10 @@ public class Main {
    * @return 桥接词查询结果字符串
    */
   public static String queryBridgeWords(String word1, String word2) {
+    // 统一转为小写，实现大小写不敏感
+    word1 = word1.toLowerCase();
+    word2 = word2.toLowerCase();
+
     // 检查单词是否存在
     boolean hasWord1 = graph.containsKey(word1);
     boolean hasWord2 = graph.containsKey(word2);
