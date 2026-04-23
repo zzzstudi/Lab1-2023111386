@@ -65,7 +65,7 @@ public class Main {
    * @param args 命令行参数，第一个参数为文件路径
    */
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
+    final Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8.name());
     graph = new LinkedHashMap<>();
     allWords = new ArrayList<>();
 
@@ -400,8 +400,8 @@ public class Main {
 
     // Dijkstra算法
     Map<String, Double> dist = new HashMap<>();
-    Map<String, String> prev = new HashMap<>();
-    Set<String> visited = new HashSet<>();
+    final Map<String, String> prev = new HashMap<>();
+    final Set<String> visited = new HashSet<>();
 
     // 初始化
     for (String node : graph.keySet()) {
@@ -482,8 +482,8 @@ public class Main {
 
       // 对每个目标节点运行Dijkstra
       Map<String, Double> dist = new HashMap<>();
-      Map<String, String> prev = new HashMap<>();
-      Set<String> visited = new HashSet<>();
+      final Map<String, String> prev = new HashMap<>();
+      final Set<String> visited = new HashSet<>();
 
       for (String node : graph.keySet()) {
         dist.put(node, Double.POSITIVE_INFINITY);
@@ -659,7 +659,7 @@ public class Main {
     }
 
     List<String> visitedNodes = new ArrayList<>();
-    Set<String> visitedEdges = new HashSet<>();
+    final Set<String> visitedEdges = new HashSet<>();
 
     // 随机选择起始节点
     String currentNode = allWords.get(RANDOM.nextInt(allWords.size()));
@@ -675,7 +675,7 @@ public class Main {
         stop[0] = true;
         System.out.println("\n用户手动停止游走。");
       } catch (IOException e) {
-        // 忽略
+        // 异常不影响核心流程，无需处理
       }
     });
     inputThread.setDaemon(true);
@@ -846,11 +846,11 @@ public class Main {
         writer.print(dot.toString());
       }
 
-      System.out.println("✅ DOT file saved: " + dotFile);
-      System.out.println("📖 Open in VS Code, right-click and select \"Preview Dot\" to view graph!");
+      System.out.println("DOT file saved: " + dotFile);
+      System.out.println("Open in VS Code, right-click and select \"Preview Dot\" to view graph!");
 
     } catch (IOException e) {
-      System.out.println("❌ Save failed: " + e.getMessage());
+      System.out.println("Save failed: " + e.getMessage());
     }
   }
 }
